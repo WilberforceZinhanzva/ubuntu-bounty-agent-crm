@@ -1,165 +1,186 @@
-# Ubuntu Bounty - Lead Management System
+# Ubuntu Bounty - Agent CRM System
 
-A comprehensive React web application for managing field agents and client leads for Ubuntu Bounty Company.
+A comprehensive Customer Relationship Management (CRM) system designed for Ubuntu Bounty Company to manage field agents and track leads efficiently.
 
-## Features
+## 🚀 Features
 
-### 🏢 Dashboard
+### Dashboard
 - **Real-time Statistics**: Total agents, weekly/monthly/all-time leads
 - **Lead Status Tracking**: Claimed vs unclaimed leads
-- **Agent Distribution**: View agents grouped by location
-- **Recent Activity**: Track latest lead submissions
+- **Quick Actions**: Add agents, leads, and export reports
 
-### 👥 Agent Management
-- **Agent Registration**: Full name, contact details, email, location (all optional)
-- **Agent Profiles**: View complete agent information and lead history
-- **Search & Filter**: Filter by location, registration date, or search by name/contact
-- **Agent Dashboard**: Visual representation of agents by location
+### Field Agent Management
+- Register field agents with contact details and locations
+- Filter agents by location and registration date
+- View agent profiles with complete lead history
+- Agent dashboard showing numbers grouped by location
 
-### 🎯 Lead Management
-- **Lead Creation**: Client details, contact info, location, interest level (all optional)
-- **Lead Assignment**: Associate leads with specific agents
-- **Status Management**: Claim/unclaim leads with assignee tracking
-- **Advanced Filtering**: Search by client name, contact, date, or agent
-- **Export Options**: Download data as PDF, Excel, or CSV formats
-- **Claimed Leads Report**: Separate export for claimed leads with assignee details
+### Lead Management
+- Comprehensive lead tracking with client information
+- Interest level categorization (Low, Medium, High, Very High)
+- Lead claiming functionality with assignee tracking
+- Advanced filtering by client name, contact, or registration date
+- Export capabilities (PDF, Excel, CSV)
 
-### 👤 User Management (Super Admin Only)
-- **User Creation**: Name, contact details, email, role assignment
-- **Permission System**: View-only or View+Edit rights
-- **PIN Management**: Customizable login credentials (default: 2025)
-- **User Profiles**: Edit user details and permissions
-- **Account Security**: PIN visibility toggle and secure authentication
+### User Management (Super Admin)
+- Role-based access control (Super Admin, View & Edit, View Only)
+- User profile management with contact details
+- Secure PIN-based authentication (Default: 2025)
 
-### ⚙️ Settings
-- **Company Branding**: Upload and manage company logo
-- **System Information**: Application details and current user info
-- **Design Theme**: Modern blue and green color scheme
-- **Security Overview**: Data storage and backup information
+### Settings & Configuration
+- Company logo upload functionality
+- System settings management
+- Modern UI with blue and green color scheme
 
-## Technical Specifications
+## 🛠️ Technology Stack
 
-### 🛠️ Built With
-- **React 18.2.0** - Modern React with hooks and context
-- **React Router 6** - Client-side routing
-- **Lucide React** - Beautiful, customizable icons
-- **jsPDF & jsPDF-AutoTable** - PDF generation
-- **XLSX** - Excel file generation
-- **Date-fns** - Date manipulation utilities
+- **Frontend**: Next.js 14, React 18, Tailwind CSS
+- **Backend**: Next.js API Routes
+- **Database**: Neon Postgres (Serverless)
+- **Deployment**: Vercel
+- **Icons**: Heroicons
+- **Styling**: Tailwind CSS with custom design system
 
-### 🎨 Design Features
-- **Responsive Design**: Mobile-first approach with CSS Grid and Flexbox
-- **Modern UI**: Clean, professional interface with gradient backgrounds
-- **Color Scheme**: Blue and green theme as specified
-- **Accessibility**: Proper contrast ratios and keyboard navigation
-- **Loading States**: Smooth user experience with loading indicators
-
-### 🔒 Security Features
-- **PIN Authentication**: Secure login system (default PIN: 2025)
-- **Role-based Access**: Super Admin and User roles with different permissions
-- **Local Storage**: Client-side data persistence
-- **Input Validation**: Form validation and error handling
-- **XSS Protection**: Safe HTML rendering and input sanitization
-
-## Installation & Setup
+## 📦 Installation & Setup
 
 ### Prerequisites
-- Node.js (version 14 or higher)
-- npm or yarn package manager
+- Node.js 18 or higher
+- Neon Postgres database
+- Vercel account (for deployment)
 
-### Installation Steps
+### Local Development
 
-1. **Clone or download the project files**
-2. **Install dependencies:**
+1. **Clone the repository**
+   ```bash
+   git clone <your-repo-url>
+   cd ubuntu-bounty
+   ```
+
+2. **Install dependencies**
    ```bash
    npm install
    ```
 
-3. **Start the development server:**
+3. **Environment Setup**
    ```bash
-   npm start
+   cp .env.example .env.local
+   ```
+   
+   Update `.env.local` with your Neon database URL:
+   ```
+   DATABASE_URL="postgresql://username:password@ep-example-123456.us-east-1.aws.neon.tech/neondb?sslmode=require"
    ```
 
-4. **Open your browser and navigate to:**
+4. **Database Setup**
+   ```bash
+   npm run setup-db
    ```
-   http://localhost:3000
+
+5. **Start Development Server**
+   ```bash
+   npm run dev
    ```
 
-### Default Login
-- **PIN:** 2025
-- **Default User:** Super Admin (created automatically on first login)
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Usage Guide
+### Default Login Credentials
+- **Email**: admin@ubuntubounty.com
+- **PIN**: 2025
 
-### Getting Started
-1. **Login** with PIN 2025
-2. **Add Agents** in the Agent Management section
-3. **Create Leads** and assign them to agents
-4. **Track Progress** on the dashboard
-5. **Export Data** as needed for reporting
+## 🚀 Deployment on Vercel
 
-### User Roles
-- **Super Admin**: Full system access including user management
-- **User**: Limited access based on assigned permissions (view/edit/delete)
+1. **Push to GitHub**: Ensure your code is in a GitHub repository
 
-### Data Management
-- All data is stored locally in browser localStorage
-- Use export functions to backup important data
-- Data persists between browser sessions
-- Clear browser data will reset the application
+2. **Connect to Vercel**: 
+   - Go to [Vercel Dashboard](https://vercel.com/dashboard)
+   - Import your GitHub repository
 
-## File Structure
+3. **Environment Variables**:
+   Add these in Vercel project settings:
+   - `DATABASE_URL`: Your Neon Postgres connection string
+   - `NEXTAUTH_SECRET`: A random secret key
+   - `NEXTAUTH_URL`: Your Vercel app URL
 
-```
-src/
-├── components/
-│   ├── Login.js              # Authentication component
-│   ├── Dashboard.js          # Main dashboard with statistics
-│   ├── AgentManagement.js    # Agent CRUD operations
-│   ├── LeadManagement.js     # Lead CRUD and status management
-│   ├── UserManagement.js     # User administration (Super Admin)
-│   ├── Settings.js           # System configuration
-│   └── Navbar.js            # Navigation component
-├── context/
-│   ├── AuthContext.js        # Authentication state management
-│   └── DataContext.js        # Application data management
-├── App.js                    # Main application component
-├── index.js                  # Application entry point
-└── index.css                 # Global styles and theme
-```
+4. **Deploy**: Vercel will automatically build and deploy your application
 
-## Performance Optimizations
+## 📊 Database Schema
 
-- **Efficient Rendering**: React hooks and context for state management
-- **Memory Management**: Proper cleanup and event listener removal
-- **File Size Limits**: 5MB limit for logo uploads
-- **Lazy Loading**: Components loaded on demand
-- **Optimized Exports**: Efficient PDF and Excel generation
+### Tables
+- **system_users**: Application users with role-based permissions
+- **field_agents**: Field agents who submit leads
+- **leads**: Client leads with claim tracking
+- **company_settings**: Application configuration
 
-## Browser Compatibility
+### Key Features
+- **UUID Primary Keys**: For better security and scalability
+- **Soft Deletes**: Data integrity with `is_active` flags
+- **Automatic Timestamps**: Created/updated tracking
+- **Optimized Indexes**: Fast queries on frequently accessed data
+- **Connection Pooling**: Efficient database connections
 
-- **Chrome** (recommended)
-- **Firefox**
-- **Safari**
-- **Edge**
-- **Mobile browsers** (responsive design)
+## 🔐 Security Features
 
-## Troubleshooting
+- **Role-Based Access Control**: Three user levels with different permissions
+- **PIN Authentication**: Secure login system
+- **SQL Injection Protection**: Parameterized queries
+- **SSL Connections**: Encrypted database connections
+- **Environment Variables**: Secure configuration management
 
-### Common Issues
-1. **Data Loss**: Export data regularly as backup
-2. **Performance**: Clear browser cache if application becomes slow
-3. **Login Issues**: Ensure PIN is exactly "2025"
-4. **Export Problems**: Check browser popup blockers
+## 📱 User Interface
 
-### Support
-For technical support or feature requests, please contact the development team.
+### Design System
+- **Colors**: Blue (#1e40af) and Green (#059669) theme
+- **Typography**: Inter font family
+- **Components**: Reusable UI components with consistent styling
+- **Responsive**: Mobile-first design approach
+- **Accessibility**: WCAG compliant interface elements
 
-## License
+### User Experience
+- **Intuitive Navigation**: Clear sidebar with role-based menu items
+- **Real-time Updates**: Dynamic data loading and updates
+- **Search & Filter**: Advanced filtering capabilities
+- **Export Functions**: Multiple export formats (PDF, Excel, CSV)
+- **Modal Forms**: Clean, focused data entry
 
-This application is proprietary software developed for Ubuntu Bounty Company.
+## 🔧 Performance Optimizations
+
+- **Connection Pooling**: Efficient database connection management
+- **Strategic Indexing**: Optimized database queries
+- **Serverless Architecture**: Auto-scaling with Vercel
+- **Code Splitting**: Optimized bundle sizes
+- **Caching**: Efficient data caching strategies
+
+## 📈 Monitoring & Maintenance
+
+### Health Checks
+- Database connection monitoring
+- API endpoint health checks
+- Error logging and tracking
+
+### Backup Strategy
+- Automatic backups via Neon
+- Point-in-time recovery available
+- Data export capabilities
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is proprietary software developed for Ubuntu Bounty Company.
+
+## 📞 Support
+
+For technical support or questions:
+- Create an issue in the repository
+- Contact the development team
+- Check the documentation in `/docs`
 
 ---
 
-**Ubuntu Bounty Lead Management System v1.0.0**  
-*Built with ❤️ using React*
+**Built with ❤️ for Ubuntu Bounty Company**
