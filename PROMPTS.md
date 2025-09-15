@@ -30,3 +30,10 @@ Functionality : Under settings bar : Enable super admin to upload company Logo .
 
 Make sure the code does not have errors and it will not crush under heavy loads . Check the code over 100 times and make sure it will not have errors or crush ever .
 All entries should be empty .
+
+
+# Database Connection
+    - I am deploying the app on vercel
+    - I have a neon postgres database on vercel that I want to use to store my data
+    - Use the .env file to connect to the database
+    - Create for me the scripts I need to create the database and tables required for the application.
